@@ -14,7 +14,7 @@ def set_up_dirs(PATH):
            'Output_files/csv/',
            'Output_files/blast_results/']
     for i in lst:
-        ifExist = os.path.exists(f'{PATH}{i}')
+        ifExist = os.path.exists(f'{PATH}{i}/')
         if not ifExist:
             os.makedirs(PATH)
 

@@ -18,7 +18,7 @@ csv2fasta
 blast scripts
 """
 
-
+from Setup import set_up_dirs
 set_up_dirs('/Users/mike/OneDrive - Maryville University/Ahmed Stuff/IGV_Telomeres/THIEF_Dir')
 
 
