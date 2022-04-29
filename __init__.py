@@ -1,5 +1,8 @@
-from THIEF.csv2fasta import thief_csv2fasta
-from THIEF.gnbk2fasta import gnbk2fasta
-from THIEF.Thief import main
+from csv2fasta import *
+from gnbk2fasta import *
+from Thief import *
+from Setup import *
+import argparse
+
 
 
