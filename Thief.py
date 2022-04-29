@@ -40,7 +40,7 @@ class Thief:
                     self.seq = str(Seq(seq).lower().reverse_complement())
             else:
                 print("Error: Please specify either 'f' or 'r' stand parameter.")
-
+#
     def sliding_window(self, elements, window_size, search_sequence):
 
         if len(elements) <= window_size:
