@@ -18,15 +18,15 @@ class Thief:
         self.tmp = ''
 
     def read_fasta(self, fp):
-            name, seq = None, []
-            for line in fp:
-                line = line.rstrip()
-                if line.startswith(">"):
-                    if name: yield (name, ''.join(seq))
-                    name, seq = line, []
-                else:
-                    seq.append(line)
-            if name: yield (name, ''.join(seq))
+        name, seq = None, []
+        for line in fp:
+            line = line.rstrip()
+            if line.startswith(">"):
+                if name: yield (name, ''.join(seq))
+                name, seq = line, []
+            else:
+                seq.append(line)
+        if name: yield (name, ''.join(seq))
 
     def fasta_info(self, file):
         with open(file) as fp:
@@ -103,7 +103,6 @@ class Run_all():
         self.strand1 = strand1
         self.strand2 = strand2
         self.seek = telomere_sequence
-        return
 
     def Chroms(self, path, strand):
         finaldf = pd.DataFrame(columns=['chrom', 'pos', 'seq', 'Telo', 'Length'])
@@ -147,11 +146,14 @@ if __name__ == "__main__":
 
 # Worms
 # if __name__ == "__main__":
-#     main('/Users/mike/OneDrive - Maryville University/Ahmed Stuff/IGV_Telomeres/igv_sessions/elegans igv/telo_fastas/L/WB235/',
+#     main('/Users/mike/OneDrive - Maryville University/Ahmed Stuff/IGV_Telomeres/igv_sessions/'\
+#     'elegans igv/telo_fastas/L/WB235/',
 #          'r',
-#          '/Users/mike/OneDrive - Maryville University/Ahmed Stuff/IGV_Telomeres/igv_sessions/elegans igv/telo_fastas/R/WB235/',
+#          '/Users/mike/OneDrive - Maryville University/Ahmed Stuff/IGV_Telomeres/igv_sessions/'\
+#          'elegans igv/telo_fastas/R/WB235/',
 #          'f',
-#          '/Users/mike/OneDrive - Maryville University/Ahmed Stuff/IGV_Telomeres/igv_sessions/elegans igv/telo_fastas/THIEF_output/',
+#          '/Users/mike/OneDrive - Maryville University/Ahmed Stuff/IGV_Telomeres/igv_sessions/'\
+#          'elegans igv/telo_fastas/THIEF_output/',
 #          'WB235_Thief_C-elegans_output',
 #          '.csv',
 #          'ttaggc')
