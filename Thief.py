@@ -5,7 +5,7 @@ import os
 from datetime import datetime
 
 "Welcome to the Telomere Homology Imperfection Elucidation Function (THIEF) Script"
-
+OUT_PATH = 'Output_files/csv/' # relative file path to THIEF parent directory
 
 class Thief:
 
@@ -99,9 +99,7 @@ class Thief:
 # Execute
 class Run_all():
 
-    def __init__(self, strand1='f', strand2='f',telomere_sequence='ttaggc'):
-        self.strand1 = strand1
-        self.strand2 = strand2
+    def __init__(self,telomere_sequence='ttaggc'):
         self.seek = telomere_sequence
 
     def Chroms(self, path, strand):
@@ -114,34 +112,31 @@ class Run_all():
                 finaldf = pd.concat((finaldf, theif.df))
         self.finaldf = finaldf
 
-    def combine_frames(self, path1, path2, outpath_file):
-        self.Chroms(path1, self.strand1)
+    def combine_frames(self, path1, path2, outpath_file): # path1 is 'r', path2 is 'f' default
+        self.Chroms(path1, 'r')
         self.all_frames = self.finaldf
-        self.Chroms(path2, self.strand2)
+        self.Chroms(path2, 'f')
         self.all_frames = pd.concat([self.all_frames,self.finaldf])
         self.all_frames.to_csv(outpath_file)
 
 
-def main(path1, strand1, path2, strand2, out_path, out_file_name, out_file_extension, telo_seq):
-    run_thief = Run_all(strand1,strand2, telo_seq)
+def thief_call(path1, path2, out_file_name = 'THIEF_output', telo_seq): #path 1 is L dir, path2 is R dir
+    OUT_FILE_EXTENSION = '.csv'
+    run_thief = Run_all(telo_seq)
     now = datetime.now()
     time = now.strftime("%Y_%m_%d__%H_%M")
-    if not out_path.endswith('/'):
-        output_path = out_path + '/'
+    if not OUT_PATH.endswith('/'):
+        OUT_PATH = out_path + '/'
     if not out_file_extension.startswith('.'):
         out_file_extension = '.' + out_file_extension
-    out = f'{out_path}{time}_{out_file_name}{out_file_extension}'
+    out = f'{OUT_PATH}{time}_{out_file_name}{OUT_FILE_EXTENSION}'
     run_thief.combine_frames(path1, path2, out)
 
 # Humans
 if __name__ == "__main__":
-    main('/Users/mike/OneDrive - Maryville University/Ahmed Stuff/IGV_Telomeres/igv_sessions/Human/L/',
-         'r',
+    thief_call('/Users/mike/OneDrive - Maryville University/Ahmed Stuff/IGV_Telomeres/igv_sessions/Human/L/',
          '/Users/mike/OneDrive - Maryville University/Ahmed Stuff/IGV_Telomeres/igv_sessions/Human/R/',
-         'f',
-         '/Users/mike/OneDrive - Maryville University/Ahmed Stuff/IGV_Telomeres/igv_sessions/Human/THIEF_output/',
          'Thief_Human_output',
-         '.csv',
          'ttaggg')
 
 # Worms
