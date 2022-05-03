@@ -1,4 +1,4 @@
-#!/bin/bash
+
 
 # loop through all files in dir
 for file in Input_files/Genomes/*; do
