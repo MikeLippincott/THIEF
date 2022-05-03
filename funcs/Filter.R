@@ -1,6 +1,7 @@
 #!/usr/bin/env Rscript
 # Libraries
 library(dplyr)
+library(stringr)
 library(optparse)
 
 option_list = list(
@@ -53,7 +54,6 @@ thief_worms <- function(full_file_path,telo_seq){
         uniqueseq <- unique(df1$seq)
         df2 <- filter(df1, chrom == 'cow')
         for (i in 1:length(uniqueseq)){
-                print(i)
                 # df$ID <- df$seq == uniqueseq[i]
                 tmp <- df1 %>%
                         mutate(ID = case_when(

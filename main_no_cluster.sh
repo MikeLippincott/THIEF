@@ -1,12 +1,17 @@
 #!/bin/bash
 
-python main.py -pl -pr -of -t -e
+# loop through all files in dir
+for file in Input_files/Genomes/*; do
+  genome="$(basename "$file")" # basename with extension
+  genome_name="$(basename "$file" .fna)" # basename with no extension
+  pl="Input_Files/Fasta/L/${genome_name}/" # L dir
+  pr="Input_Files/Fasta/L/${genome_name}/" # R dir
+done
+
+echo ${genome}
+echo ${genome_name}
+echo ${pl}
+echo ${pr}
 
 
-
-
-parser.add_argument('-pl', '--Lpath',  help="Path containing L arm fastas", type=str)
-parser.add_argument('-pr', '--Rpath', help="Path containing R arm fastas",type=str)
-parser.add_argument('-of', '--out_file', help="name of output file (no extension)",type=str)
-parser.add_argument('-t', '--telo_seq', help="telomere sequence e.g. 'ttaggg' ",type=str)
-parser.add_argument('-g', '--genome', help="Genome File for BLAST analysis", type=str)
+python main.py -pl ${pl} -pr ${pr} -t ttaggc -g ${genome}

@@ -16,10 +16,10 @@ def set_up_dirs(new_dir):
         path = path + '/'
     print(path)
     # List of relative path's to create if not present
-    if_exists = os.path.exists((f'{path}{new_dir}/'))
+    if_exists = os.path.exists((f'{path}{new_dir}'))
     print(if_exists)
     if not if_exists:
-        os.makedirs((f'{path}{new_dir}/'))
+        os.makedirs((f'{path}{new_dir}'))
 
 
 def main():
@@ -27,3 +27,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+
+
