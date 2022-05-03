@@ -26,5 +26,5 @@ grep -v '^#' "$INPUT" | perl -ane 'if($F[8]<=$F[9]){print join("\t",$F[1],$F[8]-
 echo "done"
 
 
-# From https://github.com/nterhoeven/blast2bed/blob/master/blast2bed 
+# Script From https://github.com/nterhoeven/blast2bed/blob/master/blast2bed
 

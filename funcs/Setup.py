@@ -24,28 +24,29 @@ if __name__ == '__main__':
 
 
 
-#
-# parent_dir
-#     -Input_files
-#         -Genomes
-#             -Genome1
-#         -Gnbnk
-#         -Fastas
-#             -Genome1
-#                 -L
-#                 -R
-#             -Genome2
-#                 -L
-#                 -R
-#     -Ouput
-#         -csv
-#             -Genome1
-#                 ...output.csv
-#                 ...filtered.csv
-#                 ...blast.csv
-#                 ...blast.fasta
-#         -blast_results
-#             -Genome1
-#                 -db_Genome1
-#                 ...blastn.txt
-#                 ...blastn.txt.bed
+
+parent_dir
+    -Input_files
+        -Genomes
+            -Genome1
+        -Gnbnk
+        -Fastas
+            -Genome1
+                -L
+                -R
+            -Genome2
+                -L
+                -R
+    -Ouput
+        -Genome1
+            -csv
+                ...output.csv
+                ...filtered.csv
+                ...blast.csv
+                ...blast.fasta
+            -blast_results
+                -db_Genome1
+                    ...blastn.txt
+                    ...blastn.txt.bed
+
+
