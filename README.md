@@ -6,21 +6,22 @@
 ```
 |-- parent_dir
     |-- Input_files
-        |-- Genomes
-        |-- Genome1  
-            |-- Gnbnk  
-            |-- Fastas    
-                |-- L  
-                |-- R
+        |-- Genomes 
+        |-- Fastas    
+            |-- L
+                |-- Genome1    
+            |-- R
+                |-- Genome1     
     |-- Ouput  
-        |-- Genome1  
-            |--csv  
+        |--csv 
+            |-- Genome1   
                 |-- ...output.csv  
                 |-- ...filtered.csv  
                 |-- ...blast.csv  
                 |-- ...blast.fasta  
-            |-- blast_results  
+        |-- blast_results  
+            |-- Genome1  
                 |-- db_Genome1  
-                    |-- ...blastn.txt  
-                    |-- ...blastn.txt.bed  
+                |-- ...blastn.txt  
+                |-- ...blastn.txt.bed  
 ```

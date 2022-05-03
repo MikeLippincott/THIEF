@@ -47,7 +47,7 @@ blast scripts
 
 # THIEF structure
 lst = ['Input_Files/',
-       'Input_Files/Genome/',
+       'Input_Files/Genomes/',
        'Input_Files/gnbk/',
        'Input_Files/fasta/',
        'Output_files/',
