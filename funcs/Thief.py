@@ -4,7 +4,7 @@ import numpy as np
 import os
 from datetime import datetime
 
-"Welcome to the Telomere Homology Imperfection Elucidation Function (THIEF) Script"
+
 OUT_PATH = 'Output_files/csv/' # relative file path to THIEF parent directory
 
 class Thief:

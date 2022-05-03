@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#makeblastdb -in CB4856.fna  -dbtype nucl -out CB4856/db_CB4856
-
 while getopts g:f: flag
 do
   case "${flag}" in

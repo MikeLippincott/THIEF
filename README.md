@@ -5,7 +5,8 @@
 
 ```
 |-- parent_dir
-    |-- Input_files  
+    |-- Input_files
+        |-- Genomes
         |-- Genome1  
             |-- Gnbnk  
             |-- Fastas    

@@ -1,12 +1,6 @@
 #!/usr/bin/env Rscript
 # Libraries
-library(ggplot2)
-library(ggExtra)
 library(dplyr)
-library(GGally)
-library(kableExtra)
-library(stringr)
-library(Hmisc)
 library(optparse)
 
 option_list = list(

@@ -7,7 +7,6 @@ parser.add_argument('-pl', '--Lpath',  help="Path containing L arm fastas", type
 parser.add_argument('-pr', '--Rpath', help="Path containing R arm fastas",type=str)
 parser.add_argument('-of', '--out_file', help="name of output file (no extension)",type=str)
 parser.add_argument('-t', '--telo_seq', help="telomere sequence e.g. 'ttaggg' ",type=str)
-parser.add_argument('-g', '--gnbk_file', help="Path to ape file for fasta conversion",type=str)
 parser.add_argument('-e', '--genome', help="Genome File for BLAST analysis", type=str)
 # args = parser.parse_known_args()
 
@@ -23,7 +22,6 @@ print(args.Lpath)
 print(args.Rpath)
 print(args.out_file)
 print(args.telo_seq)
-print(args.gnbk_file)
 print(args.genome)
 
 LPATH = args.Lpath
@@ -36,13 +34,11 @@ elif TELO_SEQ == 'ttaggg':
     ORGANISM == 'human'
 else:
     ORGANISM == 'unknown'
-GNBK = args.gnbk_file
 GENOME_NAME= (args.genome).replace('.fna','')
 GENOME = args.genome
 
 """
 Setup
-gnbk2fasta # provide as an option
 Thief
 Filter.R
 csv2fasta
