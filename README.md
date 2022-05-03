@@ -1,2 +1,3 @@
-# THIEF Python Package
+# Telomere Homology Imperfection 
+# Elucidation Function (THIEF)
 

@@ -3,25 +3,18 @@ import os
 
 
 # Set up sub directories
-def set_up_dirs():
+def set_up_dirs(dir):
     import os
     PATH = os.getcwd()
     if not PATH.endswith('/'):
         PATH = PATH + '/'
     print(PATH)
     # List of relative PATH's to create if not present
-    lst = ['Input_Files/',
-           'Input_Files/Genome/',
-           'Input_Files/gnbk/',
-           'Input_Files/fasta/',
-           'Output_files/',
-           'Output_files/csv/',
-           'Output_files/blast_results/']
-    for i in lst:
-        ifExist = os.path.exists((f'{PATH}{i}/'))
-        print(ifExist)
-        if not ifExist:
-            os.makedirs((f'{PATH}{i}/'))
+    ifExist = os.path.exists((f'{PATH}{dir}/'))
+    print(ifExist)
+    if not ifExist:
+        os.makedirs((f'{PATH}{dir}/'))
+
 
 def main():
     return

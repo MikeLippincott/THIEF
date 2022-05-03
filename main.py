@@ -8,6 +8,7 @@ parser.add_argument('-pr', '--Rpath', help="Path containing R arm fastas",type=s
 parser.add_argument('-of', '--out_file', help="name of output file (no extension)",type=str)
 parser.add_argument('-t', '--telo_seq', help="telomere sequence e.g. 'ttaggg' ",type=str)
 parser.add_argument('-g', '--gnbk_file', help="Path to ape file for fasta conversion",type=str)
+parser.add_argument('-e', '--genome', help="Genome File for BLAST analysis", type=str)
 # args = parser.parse_known_args()
 
 
@@ -23,12 +24,21 @@ print(args.Rpath)
 print(args.out_file)
 print(args.telo_seq)
 print(args.gnbk_file)
+print(args.genome)
 
 LPATH = args.Lpath
 RPATH = args.Rpath
 OUT_FILE = args.out_file
 TELO_SEQ = args.telo_seq
+if TELO_SEQ == 'ttaggc':
+    ORGANISM == 'worms'
+elif TELO_SEQ == 'ttaggg':
+    ORGANISM == 'human'
+else:
+    ORGANISM == 'unknown'
 GNBK = args.gnbk_file
+GENOME_NAME= (args.genome).replace('.fna','')
+GENOME = args.genome
 
 """
 Setup
@@ -39,12 +49,40 @@ csv2fasta
 blast scripts
 """
 
-# set_up_dirs()
+# THIEF structure
+lst = ['Input_Files/',
+       'Input_Files/Genome/',
+       'Input_Files/gnbk/',
+       'Input_Files/fasta/',
+       'Output_files/',
+       'Output_files/csv/',
+       'Output_files/Blast_results/']
+for i in lst:
+    set_up_dirs(i)
+set_up_dirs(f'Output_files/Blast_results/{GENOME_NAME}')
+
+
+
 if not GNBK is None:
     gnbk2fasta(GNBK)
+call = Call()
+call.thief_call(LPATH, RPATH , OUT_FILE, TELO_SEQ)
+sub = subprocess.call(f'Rscript Filter.R -f {call.out} -r {ORGANISM}', shell=True)
+def parse_stdout(sub_proc):
+    lst = str(sub_proc).split('stdout=b\'[1] ')[1].split('[1]')
+    print(str(lst[0]).strip('\\n').strip('"'))
+    tmp_file = str(lst[1]).strip("\\n\')").strip('"').strip(' "')
+blast_file = parse_stdout(sub)
+thief_csv2fasta(blast_file)
+fasta4blast = blast_file.replace('.csv','.fasta')
+subprocess.call(f'blast_no_cluster.sh -g {GENOME_NAME} -f {fasta4blast}', shell=True)
+blast_output = f'{GENOME_NAME}_blastn.txt'
+subprocess.call(f'Rscript blast_column_names.R -f {blast_output}', shell=True)
 
-thief_call(LPATH, RPATH , OUT_FILE, TELO_SEQ)
-subprocess.call(f'Rscript Filter.R -f {} -r {}", shell=True)
+
+
+
+
 
 
 # set_up_dirs(PATH)
@@ -56,9 +94,5 @@ subprocess.call(f'Rscript Filter.R -f {} -r {}", shell=True)
 # blast_query.sh
 # run_blast2bed.sh (blast2bed.sh)
 # blast_column_names.R
-
-
-
-# subprocess.call("Rscript testScript.R -f test1 -r test2", shell=True)
 
 

@@ -1,5 +1,12 @@
 #!/usr/bin/env Rscript
 # Libraries
+library(ggplot2)
+library(ggExtra)
+library(dplyr)
+library(GGally)
+library(kableExtra)
+library(stringr)
+library(Hmisc)
 library(optparse)
 
 option_list = list(
@@ -10,6 +17,8 @@ option_list = list(
 );
 opt_parser = OptionParser(option_list=option_list);
 opt = parse_args(opt_parser);
+
+
 
 if (is.null(opt$file)){
         print_help(opt_parser)
@@ -30,7 +39,8 @@ thief_worms <- function(full_file_path,telo_seq){
         # list of unique sequences (non telomeric)
         uniqueseq <- unique(df$seq)
         # new column stating arm of telomere
-        df1 <- mutate(df1$chrom_arm = case_when(
+        df1 <- df %>%
+                mutate(chrom_arm = case_when(
                         startsWith(chrom, "IL") ~ "IL",
                         startsWith(chrom, "IR") ~ "IR",
                         startsWith(chrom, "IIL") ~ "IIL",
@@ -59,13 +69,17 @@ thief_worms <- function(full_file_path,telo_seq){
                 nrow(df2)
         }
         df2_no_telo <- df2[!grepl(telo_seq,df2$Telo),]
-        write.csv(df2_no_telo,paste0(filepath,'/',filename_nakey,"_Filtered.csv"))
+        file1 <- paste0(filepath,'/',filename_nakey,"_Filtered.csv")
+        write.csv(df2_no_telo,file1)
         tmp <- aggregate(data.frame(count = df2_no_telo$seq), list(value = df2_no_telo$seq), length)
         tmp$seq_len <- str_length(tmp$value)
         tmp$sandwhich_seq_L <- paste0(telo_seq,tmp$value)
         tmp$sandwhich_seq_R <- paste0(tmp$value,telo_seq)
         tmp$sandwhich_seq <- paste0(telo_seq,tmp$value,telo_seq)
-        write.csv(tmp,paste0(filepath,'/',filename_nakey,"_table_for_blast.csv"))
+        file2 <- paste0(filepath,'/',filename_nakey,"_table_for_blast.csv")
+        write.csv(tmp,file2)
+        print(file1)
+        print(file2)
 }
 thief_humans <- function(full_file_path,telo_seq){
         csvdir <- (full_file_path)
@@ -144,13 +158,17 @@ thief_humans <- function(full_file_path,telo_seq){
                 nrow(df2)
         }
         df2_no_telo <- df2[!grepl(telo_seq,df2$Telo),]
-        write.csv(df2_no_telo,paste0(filepath,'/',filename_nakey,"_Filtered.csv"))
+        file1 <- paste0(filepath,'/',filename_nakey,"_Filtered.csv")
+        write.csv(df2_no_telo,file1)
         tmp <- aggregate(data.frame(count = df2_no_telo$seq), list(value = df2_no_telo$seq), length)
         tmp$seq_len <- str_length(tmp$value)
         tmp$sandwhich_seq_L <- paste0(telo_seq,tmp$value)
         tmp$sandwhich_seq_R <- paste0(tmp$value,telo_seq)
         tmp$sandwhich_seq <- paste0(telo_seq,tmp$value,telo_seq)
-        write.csv(tmp,paste0(filepath,'/',filename_nakey,"_table_for_blast.csv"))
+        file2 <- paste0(filepath,'/',filename_nakey,"_table_for_blast.csv")
+        write.csv(tmp,file2)
+        print(file1)
+        print(file2)
 }
 organism_error <- function(){
         error_message <- c("Error: Organism not Found.",
@@ -171,3 +189,4 @@ thief_clean <- function(full_file_path,organism){
 }
 
 thief_clean(opt$file,opt$organism)
+

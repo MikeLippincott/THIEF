@@ -119,18 +119,23 @@ class Run_all():
         self.all_frames = pd.concat([self.all_frames,self.finaldf])
         self.all_frames.to_csv(outpath_file)
 
+class Call:
 
-def thief_call(path1, path2, out_file_name = 'THIEF_output', telo_seq): #path 1 is L dir, path2 is R dir
-    OUT_FILE_EXTENSION = '.csv'
-    run_thief = Run_all(telo_seq)
-    now = datetime.now()
-    time = now.strftime("%Y_%m_%d__%H_%M")
-    if not OUT_PATH.endswith('/'):
-        OUT_PATH = out_path + '/'
-    if not out_file_extension.startswith('.'):
-        out_file_extension = '.' + out_file_extension
-    out = f'{OUT_PATH}{time}_{out_file_name}{OUT_FILE_EXTENSION}'
-    run_thief.combine_frames(path1, path2, out)
+    def __init__(self):
+        return
+
+    def thief_call(self, path1, path2, out_file_name = 'THIEF_output', telo_seq): #path 1 is L dir, path2 is R dir
+        OUT_FILE_EXTENSION = '.csv'
+        run_thief = Run_all(telo_seq)
+        now = datetime.now()
+        time = now.strftime("%Y_%m_%d__%H_%M")
+        if not OUT_PATH.endswith('/'):
+            OUT_PATH = out_path + '/'
+        if not out_file_extension.startswith('.'):
+            out_file_extension = '.' + out_file_extension
+        self.out = f'{OUT_PATH}{time}_{out_file_name}{OUT_FILE_EXTENSION}'
+        run_thief.combine_frames(path1, path2, out)
+
 
 # Humans
 if __name__ == "__main__":
