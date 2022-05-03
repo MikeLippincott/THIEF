@@ -9,6 +9,7 @@ OUT_PATH = 'Output_files/csv/' # relative file path to THIEF parent directory
 
 class Thief:
 
+
     def __init__(self, file, strand='f', telomere_sequence='ttaggc'):
         self.file = file
         self.strand = strand
@@ -97,7 +98,7 @@ class Thief:
 
 
 # Execute
-class Run_all():
+class Run_all:
 
     def __init__(self,telomere_sequence='ttaggc'):
         self.seek = telomere_sequence
@@ -135,6 +136,33 @@ class Call:
             out_file_extension = '.' + out_file_extension
         self.out = f'{OUT_PATH}{time}_{out_file_name}{OUT_FILE_EXTENSION}'
         run_thief.combine_frames(path1, path2, out)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # Humans

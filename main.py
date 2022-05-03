@@ -5,7 +5,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument('-pl', '--Lpath',  help="Path containing L arm fastas", type=str)
 parser.add_argument('-pr', '--Rpath', help="Path containing R arm fastas",type=str)
-parser.add_argument('-of', '--out_file', help="name of output file (no extension)",type=str)
+# parser.add_argument('-of', '--out_file', help="name of output file (no extension)",type=str)
 parser.add_argument('-t', '--telo_seq', help="telomere sequence e.g. 'ttaggg' ",type=str)
 parser.add_argument('-e', '--genome', help="Genome File for BLAST analysis", type=str)
 # args = parser.parse_known_args()
@@ -48,21 +48,25 @@ blast scripts
 # THIEF structure
 lst = ['Input_Files/',
        'Input_Files/Genomes/',
-       'Input_Files/gnbk/',
        'Input_Files/fasta/',
+       'Input_Files/fasta/L/',
+       'Input_Files/fasta/R/',
        'Output_files/',
        'Output_files/csv/',
-       'Output_files/Blast_results/']
+       'Output_files/Blast_results/',
+       f'Output_files/Blast_results/{GENOME_NAME}',
+       f'Input_Files/fasta/L/{GENOME_NAME}',
+       f'Input_Files/fasta/R/{GENOME_NAME}',
+       f'Output_files/csv/{GENOME_NAME}']
 for i in lst:
     set_up_dirs(i)
-set_up_dirs(f'Output_files/Blast_results/{GENOME_NAME}')
 
 
 
-if not GNBK is None:
-    gnbk2fasta(GNBK)
-call = Call()
-call.thief_call(LPATH, RPATH , OUT_FILE, TELO_SEQ)
+
+thief = Thief()
+thief(LPATH, RPATH ,GENOME_NAME, ORGANISM, TELO_SEQ)
+
 sub = subprocess.call(f'Rscript Filter.R -f {call.out} -r {ORGANISM}', shell=True)
 def parse_stdout(sub_proc):
     lst = str(sub_proc).split('stdout=b\'[1] ')[1].split('[1]')
@@ -71,8 +75,10 @@ def parse_stdout(sub_proc):
 blast_file = parse_stdout(sub)
 thief_csv2fasta(blast_file)
 fasta4blast = blast_file.replace('.csv','.fasta')
+
 subprocess.call(f'blast_no_cluster.sh -g {GENOME_NAME} -f {fasta4blast}', shell=True)
 blast_output = f'{GENOME_NAME}_blastn.txt'
+
 subprocess.call(f'Rscript blast_column_names.R -f {blast_output}', shell=True)
 
 
