@@ -3,9 +3,9 @@ import subprocess
 import time
 from subprocess import call
 from subprocess import run
-from funcs.setup import set_up_dirs
-from funcs.thief import Thief
-from funcs.csv2fasta import thief_csv2fasta
+from setup import set_up_dirs
+from thief import Thief
+from csv2fasta import thief_csv2fasta
 
 
 GENOME_NAME = None
@@ -79,7 +79,7 @@ thief.run_thief()
 print(thief.out)
 
 
-sub_proc = subprocess.Popen([f'Rscript funcs/Filter.R -f {thief.out} -r {ORGANISM}'],shell=True, stdout=subprocess.PIPE)
+sub_proc = subprocess.Popen([f'Rscript Filter.R -f {thief.out} -r {ORGANISM}'],shell=True, stdout=subprocess.PIPE)
 time.sleep(10)
 a = sub_proc.communicate()
 blast_file = str(a).split('[1]')[2].strip("', None)").strip('\\').strip('"')
@@ -89,10 +89,10 @@ thief_csv2fasta(blast_file)
 fasta4blast = blast_file.replace('.csv','.fasta')
 print(fasta4blast)
 
-subprocess.run([f'bash funcs/blast_script.sh -g {GENOME_NAME} -f {fasta4blast}'], shell=True)
+subprocess.run([f'bash blast_script.sh -g {GENOME_NAME} -f {fasta4blast}'], shell=True)
 blast_output = f'Output_Files/Blast_results/{GENOME_NAME}/{GENOME_NAME}_blastn.txt'
 
-subprocess.call(f'Rscript funcs/blast_column_names.R -f {blast_output}', shell=True)
+subprocess.call(f'Rscript blast_column_names.R -f {blast_output}', shell=True)
 
 
 
@@ -115,7 +115,7 @@ subprocess.call(f'Rscript funcs/blast_column_names.R -f {blast_output}', shell=T
 # #
 # file_path = 'Output_files/csv/CB4856/2022_05_03__16_00_THIEF_CB4856_wormsoutput.csv'
 #
-# sub_proc = subprocess.Popen([f'Rscript funcs/Filter.R -f {file_path} -r worms'],shell=True, stdout=subprocess.PIPE)
+# sub_proc = subprocess.Popen([f'Rscript Filter.R -f {file_path} -r worms'],shell=True, stdout=subprocess.PIPE)
 # time.sleep(10)
 # a = sub_proc.communicate()
 #

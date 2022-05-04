@@ -1,6 +1,11 @@
 
-# init
-
+# args
+while getopts g:f: flag
+do
+  case "${flag}" in
+    t) teloseq=${OPTARG};;
+  esac
+done
 
 
 # loop through all files in dir
@@ -17,5 +22,5 @@ echo ${pl}
 echo ${pr}
 
 
-python main.py -pl ${pl} -pr ${pr} -t ttaggc -g ${genome}
+python funcs/main.py -pl ${pl} -pr ${pr} -t ${teloseq} -g ${genome}
 
