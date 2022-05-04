@@ -1,4 +1,6 @@
 from funcs.setup import set_up_dirs
+import subprocess
+
 
 lst = ['Input_Files/',
        'Input_Files/Genomes/',
@@ -11,3 +13,5 @@ lst = ['Input_Files/',
 
 for i in lst:
     set_up_dirs(i)
+
+subprocess.run("bash funcs/main_no_cluster.sh", shell=True)

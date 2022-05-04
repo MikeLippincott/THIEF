@@ -64,6 +64,7 @@ if GENOME_NAME is None:
            'Output_Files/Blast_results/']
 else:
     lst = [f'Output_Files/Blast_results/{GENOME_NAME}',
+           f'Output_Files/Blast_results/{GENOME_NAME}/db_{GENOME_NAME}',
            f'Input_Files/Fasta/L/{GENOME_NAME}',
            f'Input_Files/Fasta/R/{GENOME_NAME}',
            f'Output_Files/csv/{GENOME_NAME}']
@@ -86,9 +87,10 @@ blast_file = str(a).split('[1]')[2].strip("', None)").strip('\\').strip('"')
 
 thief_csv2fasta(blast_file)
 fasta4blast = blast_file.replace('.csv','.fasta')
+print(fasta4blast)
 
 subprocess.run([f'bash funcs/blast_script.sh -g {GENOME_NAME} -f {fasta4blast}'], shell=True)
-blast_output = f'{GENOME_NAME}_blastn.txt'
+blast_output = f'Output_Files/Blast_results/{GENOME_NAME}/{GENOME_NAME}_blastn.txt'
 
 subprocess.call(f'Rscript funcs/blast_column_names.R -f {blast_output}', shell=True)
 
@@ -110,8 +112,8 @@ subprocess.call(f'Rscript funcs/blast_column_names.R -f {blast_output}', shell=T
 
 
 
-#
-# file_path = 'Output_files/csv/CB4856/2022_05_03__10_04_THIEF_CB4856_wormsoutput.csv'
+# #
+# file_path = 'Output_files/csv/CB4856/2022_05_03__16_00_THIEF_CB4856_wormsoutput.csv'
 #
 # sub_proc = subprocess.Popen([f'Rscript funcs/Filter.R -f {file_path} -r worms'],shell=True, stdout=subprocess.PIPE)
 # time.sleep(10)
@@ -119,4 +121,7 @@ subprocess.call(f'Rscript funcs/blast_column_names.R -f {blast_output}', shell=T
 #
 # print(str(a).split('[1]')[1].strip('\\n').strip(' "'))
 # print(str(a).split('[1]')[2].strip("', None)").strip('\\').strip('"'))
+#
+#
+
 

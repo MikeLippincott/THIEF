@@ -18,3 +18,4 @@ echo ${pr}
 
 
 python main.py -pl ${pl} -pr ${pr} -t ttaggc -g ${genome}
+
