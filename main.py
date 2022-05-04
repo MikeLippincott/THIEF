@@ -52,7 +52,6 @@ blast scripts
 """
 
 
-
 # THIEF structure
 if GENOME_NAME is None:
     lst = ['Input_Files/',
