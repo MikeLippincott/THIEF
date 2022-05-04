@@ -8,10 +8,8 @@
 ```
 cd desired/directory/ # where THIEF will be cloned to
 git clone github/MikeLippincott/THIEF # clone THIEF
-cd ../ # step back 
-python THIEF # initialize  Thief structure
 cd THIEF 
-./run_thief.sh -t ttaggg     # run thief with arg "-t ttaggg" ttaggc is telomere sequence input
+bash run_thief.sh -t ttaggg     # run thief with arg "-t ttaggg" ttaggc is telomere sequence input
 ```
 The Author recommends running in a venv
 ## Dependencies

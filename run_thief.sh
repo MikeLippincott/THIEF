@@ -7,6 +7,7 @@ do
   esac
 done
 
+python __main__.py
 
 # loop through all files in dir
 for file in Input_files/Genomes/*; do
