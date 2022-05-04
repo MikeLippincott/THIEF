@@ -1,5 +1,4 @@
 import os
-import shutil
 
 # Ape file (Genbank) -> fasta
 # Throwing a parsing error, decided to parse myself...

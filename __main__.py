@@ -1,5 +1,4 @@
 from funcs.setup import set_up_dirs
-import subprocess
 
 
 lst = ['Input_Files/',
