@@ -1,6 +1,6 @@
 
 # args
-while getopts :t: flag
+while getopts s flag
 do
   case "${flag}" in
     s) teloseq=${OPTARG};;
