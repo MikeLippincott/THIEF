@@ -80,8 +80,9 @@ print(thief.out)
 
 
 sub_proc = subprocess.Popen([f'Rscript Filter.R -f {thief.out} -r {ORGANISM}'],shell=True, stdout=subprocess.PIPE)
-time.sleep(10)
+time.sleep(5)
 a = sub_proc.communicate()
+print(a)
 blast_file = str(a).split('[1]')[2].strip("', None)").strip('\\').strip('"')
 
 
