@@ -28,7 +28,7 @@ numpy
 ```
 ##### R
 ```
-$ 4.1.1
+4.1.1
 dplyr
 optparse
 stringr
