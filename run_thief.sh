@@ -1,11 +1,13 @@
 
 # args
-while getopts t: flag
+while getopts :t: flag
 do
   case "${flag}" in
-    t) teloseq=${OPTARG};;
+    s) teloseq=${OPTARG};;
   esac
 done
+
+
 
 python __main__.py
 
