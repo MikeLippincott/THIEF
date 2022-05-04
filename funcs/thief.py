@@ -96,7 +96,7 @@ class Thief:
         now = datetime.now()
         time = now.strftime("%Y_%m_%d__%H_%M")
 
-        out_file_name = f'THIEF_{self.Genome_name}_{self.organism}/output'
+        out_file_name = f'THIEF_{self.Genome_name}_{self.organism}_output'
 
         OUT_FILE_EXTENSION = '.csv'
 
