@@ -12,3 +12,4 @@ lst = ['Input_Files/',
 
 for i in lst:
     set_up_dirs(i)
+

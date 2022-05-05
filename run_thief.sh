@@ -19,11 +19,6 @@ for file in Input_files/Genomes/*; do
   pr="Input_Files/Fasta/R/${genome_name}/" # R dir
 done
 
-echo ${genome}
-echo ${genome_name}
-echo ${pl}
-echo ${pr}
-
 
 python funcs/main.py -pl ${pl} -pr ${pr} -t ${teloseq} -g ${genome}
 

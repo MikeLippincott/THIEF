@@ -25,10 +25,6 @@ parser.add_argument('-g', '--genome', help="Genome File for BLAST analysis", typ
 
 args = parser.parse_args()
 
-print(args.Lpath)
-print(args.Rpath)
-print(args.telo_seq)
-print(args.genome)
 
 LPATH = args.Lpath
 RPATH = args.Rpath
@@ -76,19 +72,16 @@ for i in lst:
 
 thief = Thief(LPATH, RPATH ,GENOME_NAME, ORGANISM, TELO_SEQ)
 thief.run_thief()
-print(thief.out)
 
 
 sub_proc = subprocess.Popen([f'Rscript funcs/Filter.R -f {thief.out} -r {ORGANISM}'],shell=True, stdout=subprocess.PIPE)
 time.sleep(5)
 a = sub_proc.communicate()
-print(a)
 blast_file = str(a).split('[1]')[2].strip("', None)").strip('\\').strip('"')
 
 
 thief_csv2fasta(blast_file)
 fasta4blast = blast_file.replace('.csv','.fasta')
-print(fasta4blast)
 
 subprocess.run([f'bash funcs/blast_script.sh -g {GENOME_NAME} -f {fasta4blast}'], shell=True)
 blast_output = f'Output_Files/Blast_results/{GENOME_NAME}/{GENOME_NAME}_blastn.txt'
@@ -96,33 +89,5 @@ blast_output = f'Output_Files/Blast_results/{GENOME_NAME}/{GENOME_NAME}_blastn.t
 subprocess.call(f'Rscript funcs/blast_column_names.R -f {blast_output}', shell=True)
 
 
-
-
-
-
-
-# set_up_dirs(PATH)
-# gnbk2fasta(path_n_gnbkfile)
-# thief_call(path1, strand1, path2, strand2, out_path, out_file_name, out_file_extension, telo_seq)
-# Filter.R
-# thief_csv2fasta(path)
-# blast_db_generate.sh
-# blast_query.sh
-# run_blast2bed.sh (blast2bed.sh)
-# blast_column_names.R
-
-
-
-# #
-# file_path = 'Output_files/csv/CB4856/2022_05_03__16_00_THIEF_CB4856_wormsoutput.csv'
-#
-# sub_proc = subprocess.Popen([f'Rscript Filter.R -f {file_path} -r worms'],shell=True, stdout=subprocess.PIPE)
-# time.sleep(10)
-# a = sub_proc.communicate()
-#
-# print(str(a).split('[1]')[1].strip('\\n').strip(' "'))
-# print(str(a).split('[1]')[2].strip("', None)").strip('\\').strip('"'))
-#
-#
 
 

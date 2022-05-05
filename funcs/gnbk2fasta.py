@@ -10,7 +10,6 @@ def gnbk2fasta(path_n_gnbkfile): #file and path
     # Extract filename
     filename = os.path.basename(path_n_gnbkfile)
     path = os.path.dirname(path_n_gnbkfile)
-    print(path)
     basename = filename.split('.')[0]
     # Extract Genbank sequence
     file = open(path_n_gnbkfile,'r')
@@ -22,7 +21,6 @@ def gnbk2fasta(path_n_gnbkfile): #file and path
     file.close()
     # Write to fasta file
     outfilename = f'{path}/{basename}.fasta'
-    print(outfilename)
     outfile = open(f'{path}/{basename}.fasta','w')
     outfile.write((f'>{basename}\n'))
     outfile.write(seq)
