@@ -11,12 +11,15 @@ parser.add_argument('-i', '--input',  help="Path to genome file.fna", type=str)
 parser.add_argument('-b', '--begin', help="begining of range (0)",type=int)
 parser.add_argument('-e', '--end', help="end of slicing range (100000)",type=int)
 parser.add_argument('-s', '--step_size', help="interval of telomere slicing", type=int)
-parser.add_argument('-t', '--telo_seq', "telomere seuqence to be added", type=str)
-parser.add_argument('-o', '--output_path', help="Path for Output", type=str)
+parser.add_argument('-t', '--telo_seq', help="telomere seuqence to be added", type=str)
+# parser.add_argument('-o', '--output_path', help="Path for Output", type=str)
 
 args = parser.parse_args()
 
-
+from ..funcs.setup import set_up_dirs
+setupdirs('Output/')
+output_dir = f'Output/{args.input.repalce(".fna","")
+set_up_dirs(f'Output/{args.input.repalce(".fna","")}'
 
 
 class TeloFragment:
@@ -86,8 +89,8 @@ class TeloFragment:
 
 def main():
     for i in ('L', 'R'):
-        telo = Telo_fragment(args.telo_seq)
-        telo.run(args.input, args.begin, i, args.begin, args.end, args.step_size, ars.output_path)
+        telo = TeloFragment(args.telo_seq)
+        telo.run(args.input, i, args.begin, args.end, args.step_size, output_dir)
 
 if __name__ == "__main__":
     main()
