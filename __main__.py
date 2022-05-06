@@ -8,7 +8,8 @@ lst = ['Input_Files/',
        'Input_Files/Fasta/R/',
        'Output_Files/',
        'Output_Files/csv/',
-       'Output_Files/Blast_results/']
+       'Output_Files/Blast_results/',
+       'Input_Files/Genomes/Contig_Genomes']
 
 for i in lst:
     set_up_dirs(i)

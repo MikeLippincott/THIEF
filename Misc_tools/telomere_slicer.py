@@ -1,6 +1,9 @@
 from Bio import SeqIO
 import argparse
 import os
+import sys
+path=os.getcwd()
+sys.path.insert(0, f'{path}/')
 from funcs.setup import set_up_dirs
 
 parser = argparse.ArgumentParser()
@@ -14,10 +17,12 @@ parser.add_argument('-t', '--telo_seq', help="telomere seuqence to be added", ty
 args = parser.parse_args()
 
 from funcs.setup import set_up_dirs
-setupdirs('Output/')
-output_dir = f'Output/{args.input.repalce(".fna","")}'
-set_up_dirs(f'Output/{args.input.repalce(".fna","")}')
 
+file = os.path.basename(args.input).replace(".fna","")
+import_path = f'Input_Files/Genomes/{args.input}'
+set_up_dirs('Misc_tools/Output/')
+output_dir = f'Misc_tools/Output/{file}/'
+set_up_dirs(output_dir)
 
 class TeloFragment:
 
@@ -87,7 +92,7 @@ class TeloFragment:
 def main():
     for i in ('L', 'R'):
         telo = TeloFragment(args.telo_seq)
-        telo.run(args.input, i, args.begin, args.end, args.step_size, output_dir)
+        telo.run(import_path, i, args.begin, args.end, args.step_size, output_dir)
 
 if __name__ == "__main__":
     main()
