@@ -13,9 +13,8 @@ bash run_thief.sh -s ttaggg     # run thief with arg "-t ttaggg" ttaggc is telom
 ```
 The Author recommends running in a venv
 ## Dependencies
-##### Python
+##### Python > 3.6
 ```
-python 3.9
 argparse
 subprocess
 time
@@ -31,7 +30,7 @@ dplyr
 optparse
 stringr
 ```
-##### Bash
+##### Shell
 ```
 BLAST+
 ```
