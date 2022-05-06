@@ -14,7 +14,7 @@ genome="${genome}.fna"
 genome_path="Input_Files/Genomes/${genome}"
 input_contig_path="Input_Files/Genomes/Contig_Genomes/${input_contig}.fna"
 input_contig_name="$(basename "${input_contig}")"
-blast_db_out="Misc_tools/Output/Blast/${input_contig_name}/db_${input_contig_name}/db_${input_contig_name}"
+blast_db_out="Misc_funcs/Output/Blast/${input_contig_name}/db_${input_contig_name}/db_${input_contig_name}"
 
 echo ${genome_name}
 echo ${genome}
@@ -23,13 +23,13 @@ echo ${genome_path}
 
 # slice the complete reference
 
-python Misc_tools/telomere_slicer.py -i ${genome} -b 0 -e 100000 -s 10000 -t ttaggc
+python Misc_funcs/telomere_slicer.py -i ${genome} -b 0 -e 100000 -s 10000 -t ttaggc
 
-for file in Misc_tools/Output/Index/${genome_name}/*; do
-  exportfile="Misc_tools/Output/Index/${genome_name}/${genome_name}.txt"
+rm -r Misc_funcs/Outout/Index/${genome_name}
+for file in Misc_funcs/Output/Index/${genome_name}/*; do
+  exportfile="Misc_funcs/Output/Index/${genome_name}/${genome_name}.txt"
   cat ${file} >> ${exportfile} && rm -f ${file}
 done
-
 
 
 
@@ -39,7 +39,7 @@ makeblastdb -in ${input_contig_path} -dbtype nucl -out ${blast_db_out} -title ${
 
 
 
-blast_file_out="Misc_tools/Output/Blast/${input_contig_name}/${input_contig_name}_blastn.txt"
+blast_file_out="Misc_funcs/Output/Blast/${input_contig_name}/${input_contig_name}_blastn.txt"
 
 
 blastn -query ${genome_path} -db ${blast_db_out} -evalue 1e-6 -num_threads 4 -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore qseq sseq" -out ${blast_file_out}

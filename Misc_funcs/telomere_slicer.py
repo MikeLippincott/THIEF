@@ -20,10 +20,10 @@ from funcs.setup import set_up_dirs
 
 file = os.path.basename(args.input).replace(".fna","")
 import_path = f'Input_Files/Genomes/{args.input}'
-set_up_dirs('Misc_tools/Output/')
-set_up_dirs('Misc_tools/Output/Index')
-set_up_dirs('Misc_tools/Output/Blast/')
-output_dir = f'Misc_tools/Output/Index/{file}/'
+set_up_dirs('Misc_funcs/Output/')
+set_up_dirs('Misc_funcs/Output/Index')
+set_up_dirs('Misc_funcs/Output/Blast/')
+output_dir = f'Misc_funcs/Output/Index/{file}/'
 set_up_dirs(output_dir)
 
 class TeloFragment:

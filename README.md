@@ -5,11 +5,24 @@
 
 ## Usage
 
+### Clone Repository
 ```
 cd desired/directory/ # where THIEF will be cloned to
 git clone github/MikeLippincott/THIEF # clone THIEF
-cd THIEF 
-bash run_thief.sh -s ttaggg     # run thief with arg "-t ttaggg" ttaggc is telomere sequence input
+```
+#### Main THIEF Module
+
+```
+cd THIEF/location/ 
+# run thief with arg "-s ttaggg" ttaggg is mammalian telomere sequence input
+bash run_thief.sh -s ttaggg     
+```
+#### Non-Complete Genome Assembly Telomere Scanning (N-GATS) 
+```
+cd THIEF/location/ 
+# -g genome name complete reference assembly
+# -i genome name contig level assembly
+bash Misc_funcs/Contig_blast.sh -g genome1 -i genome2
 ```
 The Author recommends running in a venv
 ## Dependencies
@@ -61,5 +74,14 @@ BLAST + can be obtained [here](https://www.ncbi.nlm.nih.gov/books/NBK569861/)
                 |-- ...blastn.txt  
                 |-- ...blast2bed.txt
                 |-- ...blast2bed.txt.bed  
+    |-- Misc_funcs
+        |-- Output
+            |-- Blast
+                |-- Genome2
+                    |-- db_Genome2
+                    |-- ...blastn.txt
+            |-- Index
+                |-- Genome1
+                    |-- ...Indexfile.txt
+            
 ```
-'
