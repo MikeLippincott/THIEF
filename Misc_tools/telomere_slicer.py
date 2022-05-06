@@ -1,10 +1,7 @@
-import Bio
-from Bio.Seq import Seq
 from Bio import SeqIO
-import pandas as pd
 import argparse
 import os
-
+from funcs.setup import set_up_dirs
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-i', '--input',  help="Path to genome file.fna", type=str)
@@ -16,10 +13,10 @@ parser.add_argument('-t', '--telo_seq', help="telomere seuqence to be added", ty
 
 args = parser.parse_args()
 
-from ..funcs.setup import set_up_dirs
+from funcs.setup import set_up_dirs
 setupdirs('Output/')
-output_dir = f'Output/{args.input.repalce(".fna","")
-set_up_dirs(f'Output/{args.input.repalce(".fna","")}'
+output_dir = f'Output/{args.input.repalce(".fna","")}'
+set_up_dirs(f'Output/{args.input.repalce(".fna","")}')
 
 
 class TeloFragment:
@@ -96,7 +93,3 @@ if __name__ == "__main__":
     main()
 
 
-
-
-
-#######################################################################################################################
