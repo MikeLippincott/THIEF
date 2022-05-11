@@ -36,8 +36,14 @@ elif TELO_SEQ == 'ttaggg':
     ORGANISM = 'human'
 else:
     ORGANISM = 'unknown'
-GENOME_NAME = (args.genome).replace('.fna','')
-GENOME = args.genome
+if (args.genome).endswith('.fna'):
+    GENOME_NAME = (args.genome).replace('.fna','')
+    GENOME = args.genome
+elif(args.genome).endswith('.fa'):
+    GENOME_NAME = (args.genome).replace('.fa','')
+    GENOME = args.genome
+else:
+    print('check file extension')
 
 """
 Setup
@@ -72,6 +78,7 @@ for i in lst:
 
 thief = Thief(LPATH, RPATH ,GENOME_NAME, ORGANISM, TELO_SEQ)
 thief.run_thief()
+print(thief.out)
 
 
 sub_proc = subprocess.Popen([f'Rscript funcs/Filter.R -f {thief.out} -r {ORGANISM}'],shell=True, stdout=subprocess.PIPE)

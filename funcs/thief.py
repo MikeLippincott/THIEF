@@ -91,7 +91,7 @@ class Thief:
         self.df['Length'] = self.df['seq'].str.len()
 
     def wrap_up_file(self):
-        OUT_PATH = f'Output_files/csv/{self.Genome_name}/'
+        OUT_PATH = f'Output_Files/csv/{self.Genome_name}/'
 
         now = datetime.now()
         time = now.strftime("%Y_%m_%d__%H_%M")

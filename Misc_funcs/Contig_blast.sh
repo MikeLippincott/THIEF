@@ -23,7 +23,7 @@ echo ${genome_path}
 
 # slice the complete reference
 
-python Misc_funcs/telomere_slicer.py -i ${genome} -b 0 -e 100000 -s 10000 -t ttaggc
+python Misc_funcs/telomere_slicer.py -i ${genome} -b 0 -e 100000 -s 5000 -t ttaggc
 
 rm -r Misc_funcs/Outout/Index/${genome_name}
 for file in Misc_funcs/Output/Index/${genome_name}/*; do
