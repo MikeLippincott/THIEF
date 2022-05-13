@@ -1,8 +1,8 @@
 #!/usr/bin/env Rscript
 # Libraries
-library(dplyr)
-library(stringr)
-library(optparse)
+suppressWarnings(suppressMessages(library(dplyr)))
+suppressWarnings(suppressMessages(library(stringr)))
+suppressWarnings(suppressMessages(library(optparse)))
 
 option_list = list(
         make_option(c("-f", "--file"), type="character", default=NULL,
@@ -142,7 +142,6 @@ thief_humans <- function(full_file_path,telo_seq){
         uniqueseq <- unique(df1$seq)
         df2 <- filter(df1, chrom == 'cow')
         for (i in 1:length(uniqueseq)){
-                print(i)
                 # df$ID <- df$seq == uniqueseq[i]
                 tmp <- df1 %>%
                         mutate(ID = case_when(

@@ -1,5 +1,7 @@
-library(dplyr)
-library(optparse)
+#!/usr/bin/env Rscript
+# Libraries
+suppressWarnings(suppressMessages(library(dplyr)))
+suppressWarnings(suppressMessages(library(optparse)))
 
 option_list = list(
         make_option(c("-f", "--file"), type="character", default=NULL,
