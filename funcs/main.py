@@ -36,6 +36,7 @@ elif TELO_SEQ == 'ttaggg':
     ORGANISM = 'human'
 else:
     ORGANISM = 'unknown'
+
 if (args.genome).endswith('.fna'):
     GENOME_NAME = (args.genome).replace('.fna','')
     GENOME = args.genome
@@ -84,8 +85,8 @@ print(thief.out)
 sub_proc = subprocess.Popen([f'Rscript funcs/Filter.R -f {thief.out} -r {ORGANISM}'],shell=True, stdout=subprocess.PIPE)
 time.sleep(5)
 a = sub_proc.communicate()
-blast_file = str(a).split('[1]')[2].strip("', None)").strip('\\').strip('"')
 
+blast_file = f'{(thief.out).replace(".csv","")}_table_for_blast.csv'
 
 thief_csv2fasta(blast_file)
 fasta4blast = blast_file.replace('.csv','.fasta')

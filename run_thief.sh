@@ -1,3 +1,16 @@
+#!/bin/bash
+#SBATCH --job-name=run_thief
+#SBATCH -t 1-23
+#SBATCH --mem=16G
+#SBATCH --output=out_%j.log
+#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-user=email@ufl.edu
+
+module load python/3.8.8
+module load r/4.3.1
+module load blast/2.13.0
+
+
 
 # args
 while getopts s: flag
