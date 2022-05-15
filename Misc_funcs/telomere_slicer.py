@@ -12,13 +12,13 @@ parser.add_argument('-b', '--begin', help="begining of range (0)",type=int)
 parser.add_argument('-e', '--end', help="end of slicing range (100000)",type=int)
 parser.add_argument('-s', '--step_size', help="interval of telomere slicing", type=int)
 parser.add_argument('-t', '--telo_seq', help="telomere seuqence to be added", type=str)
-# parser.add_argument('-o', '--output_path', help="Path for Output", type=str)
+parser.add_argument('-x', '--extension', help="file extension", type=str)
 
 args = parser.parse_args()
 
 from funcs.setup import set_up_dirs
 
-file = os.path.basename(args.input).replace(".fna","")
+file = os.path.basename(args.input).replace(f'{arg.extension}',"")
 import_path = f'Input_Files/Genomes/{args.input}'
 set_up_dirs('Misc_funcs/Output/')
 set_up_dirs('Misc_funcs/Output/Index')
@@ -38,7 +38,7 @@ class TeloFragment:
         lst=[]
         lst1=[]
         path = os.path.dirname(input_file_path)
-        self.genome_name = os.path.basename(input_file_path).replace('.fna','')
+        self.genome_name = os.path.basename(input_file_path).replace(f'{arg.extension}','')
         if not path.endswith('/'):
             path = path + '/'
         for i in SeqIO.parse(f'{input_file_path}', 'fasta'):
