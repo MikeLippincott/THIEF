@@ -8,16 +8,30 @@ do
   esac
 done
 
-genome_name="${genome}"
-genome="${genome}.fna"
-genome_path="Input_Files/Genomes/${genome}"
-blast_db_out="Output_Files/Blast_results/${genome_name}/db_${genome_name}/db_${genome_name}"
+echo $genome
+if [[ ${genome} == *.fna ]]; then
+  genome="$(basename "$genome")" # basename with extension
+  genome_name="$(basename "$genome" .fna)" # basename with no extension
+  genome_path="Input_Files/Genomes/${genome}"
+  blast_db_out="Output_Files/Blast_results/${genome_name}/db_${genome_name}/db_${genome_name}"
 
-echo ${genome_name}
-echo ${genome}
-echo ${genome_path}
-echo ${blast_db_out}
+  echo ${genome}
+  echo ${genome_name}
+  echo ${genome_path}
+  echo ${blast_db_out}
+elif [[ $genome == *.fa ]]; then
+  genome="$(basename "$genome")" # basename with extension
+  genome_name="$(basename "$genome" .fa)" # basename with no extension
+  genome_path="Input_Files/Genomes/${genome}"
+  blast_db_out="Output_Files/Blast_results/${genome_name}/db_${genome_name}/db_${genome_name}"
 
+  echo ${genome}
+  echo ${genome_name}
+  echo ${genome_path}
+  echo ${blast_db_out}
+else
+  echo "blast-script.sh error chekc inputs"
+fi
 
 
 makeblastdb -in ${genome_path} -dbtype nucl -out ${blast_db_out} -title ${genome_name}

@@ -7,7 +7,7 @@
 #SBATCH --mail-user=email@ufl.edu
 
 module load python/3.8.8
-module load r/4.3.1
+module load r/4.1.3
 module load blast/2.13.0
 
 
@@ -22,8 +22,6 @@ done
 
 
 
-python __main__.py
-
 file_dir='Input_Files/Genomes/*'
 # loop through all files in dir
 for file in $file_dir; do
@@ -33,18 +31,27 @@ for file in $file_dir; do
     genome_name="$(basename "$file" .fna)" # basename with no extension
     pl="Input_Files/Fasta/L/${genome_name}/" # L dir
     pr="Input_Files/Fasta/R/${genome_name}/" # R dir
-    python funcs/main.py -pl ${pl} -pr ${pr} -t ${teloseq} -g ${genome}
+    echo $genome
+    echo $genome_name
+    echo $pl
+    echo $pr
+    python funcs/main.py -pl ${pl} -pr ${pr} -s ${teloseq} -g ${genome}
   elif [[ $file == *.fa ]]; then
     genome="$(basename "$file")" # basename with extension
     genome_name="$(basename "$file" .fa)" # basename with no extension
     pl="Input_Files/Fasta/L/${genome_name}/" # L dir
     pr="Input_Files/Fasta/R/${genome_name}/" # R dir
-    python funcs/main.py -pl ${pl} -pr ${pr} -t ${teloseq} -g ${genome}
+    echo $genome
+    echo $genome_name
+    echo $pl
+    echo $pr
+    python funcs/main.py -pl ${pl} -pr ${pr} -s ${teloseq} -g ${genome}
   else
     echo 'Check File Extension'
   fi
 done
 
 
+echo "Complete"
 
 

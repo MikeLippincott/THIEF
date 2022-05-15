@@ -7,7 +7,7 @@
 #SBATCH --mail-user=email@ufl.edu
 
 module load python/3.8.8
-module load r/4.3.1
+module load r/4.1.3
 module load blast/2.13.0
 
 while getopts s: flag
