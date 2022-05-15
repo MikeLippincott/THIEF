@@ -17,11 +17,28 @@ do
   esac
 done
 
+
+
 REF_PATH="Input_Files/Genomes/*.fna"
 for ref in $REF_PATH; do
-        ref="$(basename "$ref" .fna)"
-        for genome in Input_Files/Genomes/Contig_Genomes/*; do
-                genome="$(basename "$genome" .fna)"
-                bash Misc_funcs/Contig_blast.sh -g $ref -i $genome -s $telo_seq
-        done
+
+  if [[ $ref == *.fna ]]; then
+    ref="$(basename "$ref" .fna)"
+    for genome in Input_Files/Genomes/Contig_Genomes/*; do
+      genome="$(basename "$genome" .fna)"
+      bash Misc_funcs/Contig_blast.sh -g $ref -i $genome -s $telo_seq -e '.fna'
+    done
+  elif [[ $ref == *.fa ]]; then
+    ref="$(basename "$ref" .fa)"
+    for genome in Input_Files/Genomes/Contig_Genomes/*; do
+      genome="$(basename "$genome" .fa)"
+      bash Misc_funcs/Contig_blast.sh -g $ref -i $genome -s $telo_seq -e '.fa'
+    done
+  else
+    echo 'run_misc_tools.sh error check extension'
+  fi
 done
+
+
+
+

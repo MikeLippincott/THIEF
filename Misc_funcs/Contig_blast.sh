@@ -6,14 +6,15 @@ do
     g) genome=${OPTARG};;
     i) input_contig=${OPTARG};;
     s) telo_seq=${OPTARG};;
+    e) extension=${OPTARG};;
   esac
 done
 
 
 genome_name="${genome}"
-genome="${genome}.fna"
+genome="${genome}."
 genome_path="Input_Files/Genomes/${genome}"
-input_contig_path="Input_Files/Genomes/Contig_Genomes/${input_contig}.fna"
+input_contig_path="Input_Files/Genomes/Contig_Genomes/${input_contig}.${extension}"
 input_contig_name="$(basename "${input_contig}")"
 blast_db_out="Misc_funcs/Output/Blast/${input_contig_name}/db_${input_contig_name}/db_${input_contig_name}"
 
@@ -24,7 +25,7 @@ echo ${genome_path}
 
 # slice the complete reference
 
-python Misc_funcs/telomere_slicer.py -i ${genome} -b 0 -e 100000 -s 5000 -t ${telo_seq}
+python Misc_funcs/telomere_slicer.py -i ${genome} -b 0 -e 100000 -s 5000 -t ${telo_seq} -x ${extension}
 
 rm -r Misc_funcs/Outout/Index/${genome_name}
 for file in Misc_funcs/Output/Index/${genome_name}/*; do
