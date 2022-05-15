@@ -35,7 +35,8 @@ for file in $file_dir; do
     echo $genome_name
     echo $pl
     echo $pr
-    python funcs/main.py -pl ${pl} -pr ${pr} -s ${teloseq} -g ${genome}
+    py_out=$(python funcs/main.py -pl ${pl} -pr ${pr} -s ${teloseq} -g ${genome})
+    echo $py_out
   elif [[ $file == *.fa ]]; then
     genome="$(basename "$file")" # basename with extension
     genome_name="$(basename "$file" .fa)" # basename with no extension
@@ -45,7 +46,8 @@ for file in $file_dir; do
     echo $genome_name
     echo $pl
     echo $pr
-    python funcs/main.py -pl ${pl} -pr ${pr} -s ${teloseq} -g ${genome}
+    py_out=$(python funcs/main.py -pl ${pl} -pr ${pr} -s ${teloseq} -g ${genome})
+    echo $py_out
   else
     echo 'Check File Extension'
   fi
