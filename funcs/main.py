@@ -27,34 +27,34 @@ args = parser.parse_args()
 
 
 
-LPATH = 'Input_Files/Fasta/L/c_elegans.PRJEB28388.WS274.genomic/'
-RPATH = 'Input_Files/Fasta/R/c_elegans.PRJEB28388.WS274.genomic/'
-TELO_SEQ = 'ttaggc'
-genome = 'c_elegans.PRJEB28388.WS274.genomic.fa'
+# LPATH = 'Input_Files/Fasta/L/c_elegans.PRJEB28388.WS274.genomic/'
+# RPATH = 'Input_Files/Fasta/R/c_elegans.PRJEB28388.WS274.genomic/'
+# TELO_SEQ = 'ttaggc'
+# genome = 'c_elegans.PRJEB28388.WS274.genomic.fa'
 
-# LPATH = args.Lpath
-# RPATH = args.Rpath
+LPATH = args.Lpath
+RPATH = args.Rpath
 
-# if (args.genome).endswith('.fna'):
-#     GENOME_NAME = (args.genome).replace('.fna','')
-#     GENOME = args.genome
-# elif(args.genome).endswith('.fa'):
-#     GENOME_NAME = (args.genome).replace('.fa','')
-#     GENOME = args.genome
-# else:
-#     print('Error in main.py')
-
-
-if (genome).endswith('.fna'):
-    GENOME_NAME = (genome).replace('.fna','')
-    GENOME = genome
-elif(genome).endswith('.fa'):
-    GENOME_NAME = (genome).replace('.fa','')
-    GENOME = genome
+if (args.genome).endswith('.fna'):
+    GENOME_NAME = (args.genome).replace('.fna','')
+    GENOME = args.genome
+elif(args.genome).endswith('.fa'):
+    GENOME_NAME = (args.genome).replace('.fa','')
+    GENOME = args.genome
 else:
     print('Error in main.py')
 
-# TELO_SEQ = args.telo_seq
+
+# if (genome).endswith('.fna'):
+#     GENOME_NAME = (genome).replace('.fna','')
+#     GENOME = genome
+# elif(genome).endswith('.fa'):
+#     GENOME_NAME = (genome).replace('.fa','')
+#     GENOME = genome
+# else:
+#     print('Error in main.py')
+
+TELO_SEQ = args.telo_seq
 if TELO_SEQ == 'ttaggc':
     ORGANISM = 'worms'
 elif TELO_SEQ == 'ttaggg':
