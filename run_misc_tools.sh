@@ -19,7 +19,7 @@ done
 
 
 
-REF_PATH="Input_Files/Genomes/*.fna"
+REF_PATH="Input_Files/Genomes/*"
 for ref in $REF_PATH; do
 
   if [[ $ref == *.fna ]]; then

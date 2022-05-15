@@ -15,6 +15,7 @@ genome_name="${genome}"
 rm -r Misc_funcs/Outout/Index/${genome_name}/
 
 genome="${genome}${extension}"
+echo ${genome}
 genome_path="Input_Files/Genomes/${genome}"
 input_contig_path="Input_Files/Genomes/Contig_Genomes/${input_contig}${extension}"
 input_contig_name="$(basename "${input_contig}")"
@@ -33,7 +34,7 @@ python Misc_funcs/telomere_slicer.py -i ${genome} -b 0 -e 100000 -s 5000 -t ${te
 for file in Misc_funcs/Output/Index/${genome_name}/*; do
   exportfile="Misc_funcs/Output/${genome_name}.txt"
   echo $file
-#  cat ${file} >> ${exportfile} && rm -f ${file}
+  cat ${file} >> ${exportfile} && rm -f ${file}
 done
 
 
