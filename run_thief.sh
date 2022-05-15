@@ -35,8 +35,22 @@ for file in $file_dir; do
     echo $genome_name
     echo $pl
     echo $pr
-    py_out=$(python funcs/main.py -pl ${pl} -pr ${pr} -s ${teloseq} -g ${genome})
-    echo $py_out
+    thief_file=$(python funcs/call_thief.py -pl ${pl} -pr ${pr} -s ${teloseq} -g ${genome})
+    echo $thief_file
+
+    Rscript funcs/Filter.R -f $thief_file -s $teloseq
+
+    blast_file=${thief_file/".csv"/"_table_for_blast.csv"/}
+    echo $blast_file
+
+    python csv2fasta.py -f $blast_file
+    fasta4blast=${blast_file/".csv"/".fasta"/}
+
+    bash funcs/blast_script.sh -g $genome -f $fasta4blast
+    blast_output='Output_Files/Blast_results/${genome_name}/${genome_name}_blastn.txt'
+    Rscript funcs/blast_column_names.R -f $blast_output
+
+
   elif [[ $file == *.fa ]]; then
     genome="$(basename "$file")" # basename with extension
     genome_name="$(basename "$file" .fa)" # basename with no extension
@@ -46,8 +60,21 @@ for file in $file_dir; do
     echo $genome_name
     echo $pl
     echo $pr
-    py_out=$(python funcs/main.py -pl ${pl} -pr ${pr} -s ${teloseq} -g ${genome})
-    echo $py_out
+    thief_file=$(python funcs/call_thief.py -pl ${pl} -pr ${pr} -s ${teloseq} -g ${genome})
+    echo $thief_file
+
+    Rscript funcs/Filter.R -f $thief_file -s $teloseq
+
+    blast_file=${thief_file/".csv"/"_table_for_blast.csv"/}
+    echo $blast_file
+
+    python csv2fasta.py -f $blast_file
+    fasta4blast=${blast_file/".csv"/".fasta"/}
+
+    bash funcs/blast_script.sh -g $genome -f $fasta4blast
+    blast_output='Output_Files/Blast_results/${genome_name}/${genome_name}_blastn.txt'
+    Rscript funcs/blast_column_names.R -f $blast_output
+
   else
     echo 'Check File Extension'
   fi
@@ -55,5 +82,4 @@ done
 
 
 echo "Complete"
-
 

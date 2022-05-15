@@ -24,14 +24,6 @@ args = parser.parse_args()
 
 
 
-
-
-
-# LPATH = 'Input_Files/Fasta/L/c_elegans.PRJEB28388.WS274.genomic/'
-# RPATH = 'Input_Files/Fasta/R/c_elegans.PRJEB28388.WS274.genomic/'
-# TELO_SEQ = 'ttaggc'
-# genome = 'c_elegans.PRJEB28388.WS274.genomic.fa'
-
 LPATH = args.Lpath
 RPATH = args.Rpath
 
@@ -42,7 +34,7 @@ elif(args.genome).endswith('.fa'):
     GENOME_NAME = (args.genome).replace('.fa','')
     GENOME = args.genome
 else:
-    print('Error in main.py')
+    print('Error in call_thief.py')
 
 
 # if (genome).endswith('.fna'):
@@ -52,7 +44,7 @@ else:
 #     GENOME_NAME = (genome).replace('.fa','')
 #     GENOME = genome
 # else:
-#     print('Error in main.py')
+#     print('Error in call_thief.py')
 
 TELO_SEQ = args.telo_seq
 if TELO_SEQ == 'ttaggc':
@@ -61,17 +53,6 @@ elif TELO_SEQ == 'ttaggg':
     ORGANISM = 'human'
 else:
     ORGANISM = 'unknown'
-
-
-
-"""
-Setup
-Thief
-Filter.R
-csv2fasta
-blast scripts
-"""
-
 
 # THIEF structure
 lst = [f'Output_Files/Blast_results/{GENOME_NAME}',
@@ -88,24 +69,4 @@ for i in lst:
 thief = Thief(LPATH, RPATH ,GENOME_NAME, ORGANISM, TELO_SEQ)
 thief.run_thief()
 print(thief.out)
-
-
-sub_proc = subprocess.Popen([f'Rscript funcs/Filter.R -f {thief.out} -r {ORGANISM}'],shell=True, stdout=subprocess.PIPE)
-time.sleep(5)
-a = sub_proc.communicate()
-print(a)
-blast_file = f'{(thief.out).replace(".csv","")}_table_for_blast.csv'
-print(blast_file)
-
-thief_csv2fasta(blast_file)
-
-fasta4blast = blast_file.replace('.csv','.fasta')
-print(fasta4blast)
-subprocess.run([f'bash funcs/blast_script.sh -g {GENOME} -f {fasta4blast}'], shell=True)
-blast_output = f'Output_Files/Blast_results/{GENOME_NAME}/{GENOME_NAME}_blastn.txt'
-
-subprocess.call(f'Rscript funcs/blast_column_names.R -f {blast_output}', shell=True)
-
-
-
 
