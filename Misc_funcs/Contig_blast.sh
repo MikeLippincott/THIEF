@@ -12,6 +12,8 @@ done
 
 
 genome_name="${genome}"
+rm -r Misc_funcs/Outout/Index/${genome_name}/
+
 genome="${genome}${extension}"
 genome_path="Input_Files/Genomes/${genome}"
 input_contig_path="Input_Files/Genomes/Contig_Genomes/${input_contig}${extension}"
@@ -24,13 +26,14 @@ echo ${genome_path}
 
 
 # slice the complete reference
-rm -r Misc_funcs/Outout/Index/${genome_name}/
+
 python Misc_funcs/telomere_slicer.py -i ${genome} -b 0 -e 100000 -s 5000 -t ${telo_seq} -x ${extension}
 
 
 for file in Misc_funcs/Output/Index/${genome_name}/*; do
   exportfile="Misc_funcs/Output/${genome_name}.txt"
-  cat ${file} >> ${exportfile} && rm -f ${file}
+  echo $file
+#  cat ${file} >> ${exportfile} && rm -f ${file}
 done
 
 
