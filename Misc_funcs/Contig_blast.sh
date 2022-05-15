@@ -1,6 +1,6 @@
 #!/bin/bash
 
-while getopts g:i: flag
+while getopts g:i:s:e: flag
 do
   case "${flag}" in
     g) genome=${OPTARG};;
@@ -12,9 +12,9 @@ done
 
 
 genome_name="${genome}"
-genome="${genome}."
+genome="${genome}${extension}"
 genome_path="Input_Files/Genomes/${genome}"
-input_contig_path="Input_Files/Genomes/Contig_Genomes/${input_contig}.${extension}"
+input_contig_path="Input_Files/Genomes/Contig_Genomes/${input_contig}${extension}"
 input_contig_name="$(basename "${input_contig}")"
 blast_db_out="Misc_funcs/Output/Blast/${input_contig_name}/db_${input_contig_name}/db_${input_contig_name}"
 
@@ -24,18 +24,18 @@ echo ${genome_path}
 
 
 # slice the complete reference
-
+rm -r Misc_funcs/Outout/Index/${genome_name}/
 python Misc_funcs/telomere_slicer.py -i ${genome} -b 0 -e 100000 -s 5000 -t ${telo_seq} -x ${extension}
 
-rm -r Misc_funcs/Outout/Index/${genome_name}
+
 for file in Misc_funcs/Output/Index/${genome_name}/*; do
-  exportfile="Misc_funcs/Output/Index/${genome_name}/${genome_name}.txt"
+  exportfile="Misc_funcs/Output/${genome_name}.txt"
   cat ${file} >> ${exportfile} && rm -f ${file}
 done
 
 
 
-# dbb is made from contig assembly
+# db is made from contig assembly
 
 makeblastdb -in ${input_contig_path} -dbtype nucl -out ${blast_db_out} -title ${input_contig_name}
 
