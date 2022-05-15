@@ -7,7 +7,7 @@ suppressWarnings(suppressMessages(library(optparse)))
 option_list = list(
         make_option(c("-f", "--file"), type="character", default=NULL,
                     help="input file name", metavar="character"),
-        make_option(c("-r", "--organism"), type="character", default="worms",
+        make_option(c("-s", "--telo_seq"), type="character", default="worms",
                     help="Organism Selection for Telomere Sequence [default= %default]", metavar="character")
 );
 opt_parser = OptionParser(option_list=option_list);
@@ -172,14 +172,14 @@ organism_error <- function(){
         print(str(msg))
 
 }
-thief_clean <- function(full_file_path,organism){
-        if (organism == 'human'){
+thief_clean <- function(full_file_path,telo_seq){
+        if (telo_seq == 'ttaggg'){
                 thief_humans(full_file_path,'ttaggg')
-        }else if (organism == 'worms'){
+        }else if (telo_seq == 'ttaggc'){
                 thief_worms(full_file_path,'ttaggc')
         }else
                 organism_error()
 }
 
-thief_clean(opt$file,opt$organism)
+thief_clean(opt$file,opt$telo_seq)
 

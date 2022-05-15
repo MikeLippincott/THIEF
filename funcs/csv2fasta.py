@@ -1,5 +1,10 @@
 import os
 import pandas as pd
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('-f', '--file_path',  help="Path containing csv table for fasta", type=str)
+args = parser.parse_args()
 
 # Csv from THIEF -> fasta
 def thief_csv2fasta(path_n_csv): #file and path
@@ -27,3 +32,9 @@ def thief_csv2fasta(path_n_csv): #file and path
         outfile.write(f'{vals[i[0]][3]}\n')
     outfile.close()
 
+def main():
+    thief_csv2fasta(args.file_path)
+
+
+if __name__ == "__main__":
+    main()
