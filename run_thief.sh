@@ -38,15 +38,16 @@ for file in $file_dir; do
     thief_file=$(python funcs/call_thief.py -pl ${pl} -pr ${pr} -s ${teloseq} -g ${genome})
     echo $thief_file
 
-    Rscript funcs/Filter.R -f $thief_file -s $teloseq
+    Rscript funcs/Filter.R -f ${thief_file} -s $teloseq
 
-    blast_file=${thief_file/".csv"/"_table_for_blast.csv"/}
+    blast_file=${thief_file/".csv"/"_table_for_blast.csv"}
     echo $blast_file
 
-    python csv2fasta.py -f $blast_file
-    fasta4blast=${blast_file/".csv"/".fasta"/}
+    python funcs/csv2fasta.py -f ${blast_file}
+    fasta4blast=${blast_file/".csv"/".fasta"}
+    echo $fasta4blast
 
-    bash funcs/blast_script.sh -g $genome -f $fasta4blast
+    bash funcs/blast_script.sh -g ${genome} -f ${fasta4blast}
     blast_output='Output_Files/Blast_results/${genome_name}/${genome_name}_blastn.txt'
     Rscript funcs/blast_column_names.R -f $blast_output
 
@@ -63,15 +64,16 @@ for file in $file_dir; do
     thief_file=$(python funcs/call_thief.py -pl ${pl} -pr ${pr} -s ${teloseq} -g ${genome})
     echo $thief_file
 
-    Rscript funcs/Filter.R -f $thief_file -s $teloseq
+    Rscript funcs/Filter.R -f ${thief_file} -s $teloseq
 
-    blast_file=${thief_file/".csv"/"_table_for_blast.csv"/}
+    blast_file=${thief_file/".csv"/"_table_for_blast.csv"}
     echo $blast_file
 
-    python csv2fasta.py -f $blast_file
-    fasta4blast=${blast_file/".csv"/".fasta"/}
+    python funcs/csv2fasta.py -f ${blast_file}
+    fasta4blast=${blast_file/".csv"/".fasta"}
+    echo $fasta4blast
 
-    bash funcs/blast_script.sh -g $genome -f $fasta4blast
+    bash funcs/blast_script.sh -g ${genome} -f ${fasta4blast}
     blast_output='Output_Files/Blast_results/${genome_name}/${genome_name}_blastn.txt'
     Rscript funcs/blast_column_names.R -f $blast_output
 

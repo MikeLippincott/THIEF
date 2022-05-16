@@ -5,7 +5,6 @@ from subprocess import call
 from subprocess import run
 from setup import set_up_dirs
 from thief import Thief
-from csv2fasta import thief_csv2fasta
 
 lst = ['Output_Files/',
        'Output_Files/csv/',
