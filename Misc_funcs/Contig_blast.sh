@@ -12,7 +12,8 @@ done
 
 
 genome_name="${genome}"
-rm -r Misc_funcs/Outout/Index/${genome_name}/
+rm -r Misc_funcs/Output/Index/${genome_name}/
+rm Misc_funcs/Output/${genome_name}.txt
 
 genome="${genome}${extension}"
 genome_path="Input_Files/Genomes/${genome}"

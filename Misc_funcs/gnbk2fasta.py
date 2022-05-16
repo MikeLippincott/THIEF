@@ -10,7 +10,7 @@ def gnbk2fasta(path_n_gnbkfile): #file and path
     # Extract filename
     filename = os.path.basename(path_n_gnbkfile)
     path = os.path.dirname(path_n_gnbkfile)
-    basename = filename.split('.')[0]
+    basename = filename.replace('.csv','')
     # Extract Genbank sequence
     file = open(path_n_gnbkfile,'r')
     data = file.read()
@@ -27,12 +27,14 @@ def gnbk2fasta(path_n_gnbkfile): #file and path
     outfile.close()
 
 
+def call (path):
+    paths = [f.path for f in os.scandir(path) if f.is_file()]
+    for i in paths:
+        if i.endswith('.ape'):
+            print(i)
+            gnbk2fasta(i)
 
-path = '/Users/mike/OneDrive - Maryville University/Ahmed Stuff/IGV_Telomeres/igv_sessions/elegans igv/'
+call('/Volumes/MLIPPINCOTT/Genomics/genomes/human genome/FASTA/GCA_021950905.1_HG002.pat.cur.20211005_genomic')
+call('/Volumes/MLIPPINCOTT/Genomics/genomes/human genome/FASTA/GCA_021951015.1_HG002.mat.cur.20211005_genomic')
 
 
-paths = [f.path for f in os.scandir(path) if f.is_file()]
-for i in paths:
-    if i.endswith('.ape'):
-        print(i)
-        gnbk2fasta(i)
