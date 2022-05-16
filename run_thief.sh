@@ -74,8 +74,8 @@ for file in $file_dir; do
     echo $fasta4blast
 
     bash funcs/blast_script.sh -g ${genome} -f ${fasta4blast}
-    blast_output='Output_Files/Blast_results/${genome_name}/${genome_name}_blastn.txt'
-    Rscript funcs/blast_column_names.R -f $blast_output
+    blast_output=Output_Files/Blast_results/$genome_name/${genome_name}_blastn.txt
+    Rscript funcs/blast_column_names.R -f ${blast_output}
 
   else
     echo 'Check File Extension'
