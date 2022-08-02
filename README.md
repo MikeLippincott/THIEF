@@ -1,7 +1,7 @@
 # Telomere Homology Imperfection Elucidation Function (THIEF)
 
 ---
-
+This tool scans genomic sequences to find telomere frames and non-telomeric sequences adjacent to telomeric sequences using a sliding window algorithm. 
 
 ## Usage
 
@@ -85,3 +85,7 @@ BLAST + can be obtained [here](https://www.ncbi.nlm.nih.gov/books/NBK569861/)
                     |-- ...Indexfile.txt
             
 ```
+Author: Mike Lippincott
+
+
+This tool was developmed in the lab of Dr. Shawn Ahmed in the Department of Genetics at the University of North Carolina at Chapel Hill.
