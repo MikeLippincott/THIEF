@@ -8,7 +8,7 @@
 ### Clone Repository
 ```
 cd desired/directory/ # where THIEF will be cloned to
-git clone github/MikeLippincott/THIEF # clone THIEF
+git clone https://github.com/MikeLippincott/THIEF.git
 ```
 #### Main THIEF Module
 
